@@ -30,27 +30,39 @@ public class MainActivity extends AppCompatActivity {
         btnSiguiente.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (!txtNombre.getText().equals(null) && !txtNombre.getText().equals("")) {
-                    btnSiguiente.setClickable(true);
-                    Intent intent = new Intent(MainActivity.this, SecondActivity.class);
-                    intent.putExtra("persona", persona);
-                    startActivity(intent);
-                } else {
-                    btnSiguiente.setClickable(false);
-                    Toast.makeText(MainActivity.this, "", Toast.LENGTH_LONG).show();
-                }
-
                 persona = new Persona();
                 persona.setNombre(txtNombre.getText().toString());
                 persona.setEmail(txtEmail.getText().toString());
                 persona.setTelefono(txtTelefono.getText().toString());
-
-
-
+                if (validacion()) {
+                    btnSiguiente.setVisibility(View.VISIBLE);
+                    Intent intent = new Intent(MainActivity.this, SecondActivity.class);
+                    intent.putExtra("persona", persona);
+                    startActivity(intent);
+                }
             }
         });
 
 
+    }
+
+    private boolean validacion() {
+        if (persona.getNombre().equals("") || persona.getNombre().equals(null)) {
+            txtNombre.requestFocus();
+            Toast.makeText(this, "El nombre no puede estar vacio", Toast.LENGTH_LONG).show();
+            return false;
+        }
+        if (persona.getEmail().equals("") || persona.getEmail().equals(null)) {
+            txtEmail.requestFocus();
+            Toast.makeText(this, "El email no puede estar vacio", Toast.LENGTH_LONG).show();
+            return false;
+        }
+        if (persona.getTelefono().equals("") || persona.getTelefono().equals(null)) {
+            txtTelefono.requestFocus();
+            Toast.makeText(this, "El telefono no puede estar vacio", Toast.LENGTH_LONG).show();
+            return false;
+        }
+        return true;
     }
 
     private void iniciar() {

@@ -6,9 +6,12 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
+import com.udemy.abencomec.seccion_01.entity.Persona;
+
 public class ThirdActivity extends AppCompatActivity {
     private Button btnComparti;
     private Button btnOK;
+    private Persona persona;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -18,11 +21,14 @@ public class ThirdActivity extends AppCompatActivity {
 
         btnOK = (Button) findViewById(R.id.btnOK);
         btnComparti = (Button) findViewById(R.id.btnCompartir);
+        Bundle bundle = getIntent().getExtras();
+        persona = (Persona) bundle.get("persona");
 
         btnOK.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 btnComparti.setVisibility(View.VISIBLE);
+                btnOK.setVisibility(View.INVISIBLE);
             }
         });
 
@@ -31,9 +37,9 @@ public class ThirdActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent sendIntent = new Intent()
                         .setAction(Intent.ACTION_SEND)
-                        .putExtra(Intent.EXTRA_STREAM,"")
+                        .putExtra(Intent.EXTRA_STREAM, persona.getMenssage())
                         .setType("text/plain");
-                startActivity(Intent.createChooser(sendIntent,"Hola"));
+                startActivity(Intent.createChooser(sendIntent, "Elegir la app para compartir"));
             }
         });
 

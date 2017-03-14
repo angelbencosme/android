@@ -12,6 +12,7 @@ public class Persona implements Serializable {
     private String email;
     private String telefono;
     private int edad;
+    private boolean tipo;
 
     public String getNombre() {
         return nombre;
@@ -45,6 +46,14 @@ public class Persona implements Serializable {
         this.edad = edad;
     }
 
+    public boolean isTipo() {
+        return tipo;
+    }
+
+    public void setTipo(boolean tipo) {
+        this.tipo = tipo;
+    }
+
     @Override
     public String toString() {
         return "Persona{" +
@@ -52,5 +61,16 @@ public class Persona implements Serializable {
                 ", email='" + email + '\'' +
                 ", telefono='" + telefono + '\'' +
                 '}';
+    }
+
+    public String getMenssage(){
+        if(tipo){
+            return "Un coordial saludo,  me llamo " +nombre + "tengo " + edad +" a?os "+ "mi correo es "+ email + " y mi telefono es "+telefono +" en lo que le podemos ayudar!!!!";
+        }else{
+            return "Adios les atentido " +nombre + "tengo " + edad +" a?os "+ "mi correo es "+ email + " y mi telefono es "+telefono +"estamos ala orden";
+        }
+
+
+
     }
 }
