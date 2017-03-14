@@ -64,11 +64,11 @@ public class Persona implements Serializable {
     }
 
     public String getMenssage(){
-        if(tipo){
-            return "Un coordial saludo,  me llamo " +nombre + "tengo " + edad +" a?os "+ "mi correo es "+ email + " y mi telefono es "+telefono +" en lo que le podemos ayudar!!!!";
-        }else{
-            return "Adios les atentido " +nombre + "tengo " + edad +" a?os "+ "mi correo es "+ email + " y mi telefono es "+telefono +"estamos ala orden";
-        }
+        return tipo == true ? "Un coordial saludo,  me llamo " + nombre + " tengo " + edad +" a?os "
+                + " mi correo es "+ email + " y mi telefono es "+telefono +" en lo que le podemos ayudar!!!!"
+                : "Adios les atentido " +nombre + " tengo " + edad +" a?os "+ " mi correo es "+ email
+                + " y mi telefono es "+telefono +"estamos ala orden";
+
 
 
 

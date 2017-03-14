@@ -19,6 +19,8 @@ public class SecondActivity extends AppCompatActivity {
     private TextView tvProgreso;
     private Button btnCompartir;
     private RadioButton rdTipo;
+    private static final int MAX_AGE = 60;
+    private static final int MIN_AGE = 16;
     int pro = 0;
 
 
@@ -43,23 +45,6 @@ public class SecondActivity extends AppCompatActivity {
                 persona.setEdad(progress);
                 tvProgreso.setText("" + persona.getEdad());
 
-                if (persona.getEdad() >= 16 && persona.getEdad() < 60) {
-                    btnCompartir.setVisibility(View.VISIBLE);
-
-                } else {
-                    if (persona.getEdad() <= 16) {
-
-                        Toast.makeText(SecondActivity.this, "No puedes compartir contenido porque" +
-                                " debes ser mayor de 16", Toast.LENGTH_SHORT).show();
-
-                    }else if(persona.getEdad() > 60){
-                        Toast.makeText(SecondActivity.this, "No puedes compartir contenido porque" +
-                                "debes ser menor de 60", Toast.LENGTH_SHORT).show();
-                    }
-
-                    btnCompartir.setVisibility(View.INVISIBLE);
-
-                }
 
             }
 
@@ -70,6 +55,27 @@ public class SecondActivity extends AppCompatActivity {
 
             @Override
             public void onStopTrackingTouch(SeekBar seekBar) {
+                persona.setEdad(0);
+                persona.setEdad(seekBar.getProgress());
+                tvProgreso.setText("" + persona.getEdad());
+
+                if (persona.getEdad() >= MIN_AGE && persona.getEdad() < MAX_AGE) {
+                    btnCompartir.setVisibility(View.VISIBLE);
+
+                } else {
+                    if (persona.getEdad() <= MIN_AGE) {
+
+                        Toast.makeText(SecondActivity.this, "No puedes compartir contenido porque" +
+                                " debes ser mayor de 16", Toast.LENGTH_SHORT).show();
+
+                    }else if(persona.getEdad() > MAX_AGE){
+                        Toast.makeText(SecondActivity.this, "No puedes compartir contenido porque" +
+                                "debes ser menor de 60", Toast.LENGTH_SHORT).show();
+                    }
+
+                    btnCompartir.setVisibility(View.INVISIBLE);
+
+                }
 
             }
         });
